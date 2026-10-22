@@ -1,0 +1,38 @@
+[
+  {
+    "id": "ord_1792675253603_8080",
+    "orderNumber": "1P-253603-8080",
+    "customerName": "Developers",
+    "customerEmail": "tekzowdevelopers@gmail.com",
+    "customerPhone": "123456780",
+    "tradingViewUsername": "asdfghjk",
+    "planId": "quarterly",
+    "planName": "3 Months Access",
+    "amountINR": 10500,
+    "durationMonths": 3,
+    "accessKey": "1PTZ26KSS589",
+    "paymentStatus": "PAID",
+    "accessStatus": "PENDING_INVITE",
+    "createdAt": "2026-10-22T13:20:53.604Z",
+    "updatedAt": "2026-10-22T13:20:53.710Z",
+    "providerPaymentId": "pay_gateway_1792675253634",
+    "fulfilmentNotes": "Verified via Direct Secure Verification at 2026-10-22T13:20:53.708Z"
+  },
+  {
+    "id": "ord_1792390436006_4721",
+    "orderNumber": "1P-436006-4721",
+    "customerName": "Tekzow Developers",
+    "customerEmail": "tekzowdevelopers@gmail.com",
+    "customerPhone": "9345895217",
+    "tradingViewUsername": "sk-tg",
+    "planId": "monthly",
+    "planName": "1 Month Access",
+    "amountINR": 4000,
+    "durationMonths": 1,
+    "accessStatus": "REVOKED",
+    "createdAt": "2026-10-19T06:13:56.006Z",
+    "updatedAt": "2026-10-19T06:14:49.093Z",
+    "providerPaymentId": "pay_gateway_1792390436019",
+    "fulfilmentNotes": "Status updated to REVOKED by admin on 11:44:49 AM"
+  }
+]
