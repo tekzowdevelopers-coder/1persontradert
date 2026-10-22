@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getAllEnquiries } from "@/lib/store";
+import { getAllEnquiriesAsync } from "@/lib/store";
 
 const ADMIN_PIN = "admin1person2026";
 
@@ -13,6 +13,6 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
   }
 
-  const enquiries = getAllEnquiries();
+  const enquiries = await getAllEnquiriesAsync();
   return NextResponse.json({ success: true, enquiries });
 }

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { validatePlanAccessKey } from "@/lib/keys";
+import { validatePlanAccessKeyAsync } from "@/lib/keys";
 
 export async function POST(req: Request) {
   try {
@@ -13,7 +13,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const result = validatePlanAccessKey(planId, accessKey);
+    const result = await validatePlanAccessKeyAsync(planId, accessKey);
     return NextResponse.json(result);
   } catch (err: any) {
     return NextResponse.json(

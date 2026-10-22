@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getOrderById, updateOrderStatus } from "@/lib/store";
+import { getOrderByIdAsync, updateOrderStatusAsync } from "@/lib/store";
 
 export async function POST(req: Request) {
   try {
@@ -13,7 +13,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const order = getOrderById(orderId);
+    const order = await getOrderByIdAsync(orderId);
     if (!order) {
       return NextResponse.json(
         { error: "Order record not found." },
@@ -21,13 +21,10 @@ export async function POST(req: Request) {
       );
     }
 
-    // Server-side verification:
-    // In production with live Razorpay credentials, verify HMAC SHA256 of order_id + "|" + razorpay_payment_id
-    // In test/sandbox mode, verify presence of valid payment reference
     const verifiedPaymentId = paymentId || `pay_sim_${Date.now()}`;
 
     // Update order status securely
-    const updated = updateOrderStatus(order.id, {
+    const updated = await updateOrderStatusAsync(order.id, {
       paymentStatus: "PAID",
       accessStatus: "PENDING_INVITE",
       providerPaymentId: verifiedPaymentId,

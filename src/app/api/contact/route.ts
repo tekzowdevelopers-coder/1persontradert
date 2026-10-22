@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { saveEnquiry } from "@/lib/store";
+import { saveEnquiryAsync } from "@/lib/store";
 import { ContactEnquiry } from "@/lib/types";
 
 export async function POST(req: Request) {
@@ -38,7 +38,7 @@ export async function POST(req: Request) {
       createdAt: new Date().toISOString(),
     };
 
-    saveEnquiry(newEnquiry);
+    await saveEnquiryAsync(newEnquiry);
 
     return NextResponse.json({
       success: true,

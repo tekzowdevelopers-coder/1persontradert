@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getAccessKeys, saveAccessKeys } from "@/lib/keys";
+import { getAccessKeysAsync, saveAccessKeysAsync } from "@/lib/keys";
 
 const ADMIN_PIN = "admin1person2026";
 
@@ -13,7 +13,7 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
   }
 
-  const keys = getAccessKeys();
+  const keys = await getAccessKeysAsync();
   return NextResponse.json({ success: true, keys });
 }
 
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { monthly, quarterly, "half-yearly": halfYearly } = body;
 
-    const updated = saveAccessKeys({
+    const updated = await saveAccessKeysAsync({
       monthly,
       quarterly,
       "half-yearly": halfYearly,

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getAllOrders, updateOrderStatus } from "@/lib/store";
+import { getAllOrdersAsync, updateOrderStatusAsync } from "@/lib/store";
 
 const ADMIN_PIN = "admin1person2026";
 
@@ -13,7 +13,7 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "Unauthorized access" }, { status: 401 });
   }
 
-  const orders = getAllOrders();
+  const orders = await getAllOrdersAsync();
   return NextResponse.json({ success: true, orders });
 }
 
@@ -33,7 +33,7 @@ export async function PATCH(req: Request) {
       );
     }
 
-    const updated = updateOrderStatus(orderId, {
+    const updated = await updateOrderStatusAsync(orderId, {
       accessStatus,
       paymentStatus,
       fulfilmentNotes,

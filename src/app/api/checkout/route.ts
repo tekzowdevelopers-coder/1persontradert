@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { PLANS } from "@/lib/data";
-import { saveOrder } from "@/lib/store";
+import { saveOrderAsync } from "@/lib/store";
 import { Order } from "@/lib/types";
-import { validatePlanAccessKey } from "@/lib/keys";
+import { validatePlanAccessKeyAsync } from "@/lib/keys";
 
 export async function POST(req: Request) {
   try {
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
     }
 
     // Validate Access Key strictly
-    const keyValidation = validatePlanAccessKey(planId, accessKey);
+    const keyValidation = await validatePlanAccessKeyAsync(planId, accessKey);
     if (!keyValidation.valid) {
       return NextResponse.json(
         { error: keyValidation.message || "Invalid Access Key. Please contact administrator." },
@@ -74,7 +74,7 @@ export async function POST(req: Request) {
       updatedAt: new Date().toISOString(),
     };
 
-    saveOrder(newOrder);
+    await saveOrderAsync(newOrder);
 
     return NextResponse.json({
       success: true,
@@ -88,7 +88,7 @@ export async function POST(req: Request) {
   } catch (err: any) {
     console.error("Checkout initiation error:", err);
     return NextResponse.json(
-      { error: "Failed to initialize order checkout. Please try again." },
+      { error: err?.message ? `Checkout error: ${err.message}` : "Failed to initialize order checkout. Please try again." },
       { status: 500 }
     );
   }
